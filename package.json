@@ -1,0 +1,27 @@
+{
+  "name": "BitcoinRateWidget",
+  "version": "0.0.1",
+  "description": "USD/BTC exchange rate in an osx dashboard widget",
+  "main": "index.html",
+  "dependencies": {
+    "grunt": "~0.4.4",
+    "grunt-bowercopy": "~1.0.0",
+    "grunt-contrib-copy": "~0.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jbeuckm/BitcoinExchangeRateWidget.git"
+  },
+  "keywords": [
+    "bitcoin",
+    "osx",
+    "dashboard",
+    "widget"
+  ],
+  "author": "Joe Beuckman <joe@beigerecords.com>",
+  "license": "Don't read software licenses. Don't write software licenses."
+}
