@@ -1,0 +1,26 @@
+{
+  "name": "BitcoinRate.wdgt",
+  "version": "0.0.1",
+  "authors": [
+    "joe beuckman <joebeuckman@gmail.com>"
+  ],
+  "description": "Basic BTC/USD rate updated on your dashboard",
+  "main": "index.html",
+  "keywords": [
+    "osx",
+    "dashboard",
+    "bitcoin",
+    "widget"
+  ],
+  "license": "Don't read software licenses. Don't write software licenses.",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.4.6"
+  }
+}
