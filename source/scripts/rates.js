@@ -27,22 +27,20 @@ var line = d3.svg.line()
   .x(function(d) { return x(d.datetime); })
   .y(function(d) { return y(d.average); });
 
-var svg = d3.select("#svg")
+var svg = d3.select("#container").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-writeDebug('will now request...');
+function drawGraph(data) {
 
-d3.csv(btc_ave_api['24h'], function(error, data) {
-
-  writeDebug(error);
-  revealObject(data);
+  var format = d3.time.format('%Y-%m-%d %H:%M:%S')
 
   data.forEach(function(d) {
-    d.datetime = new Date(d.datetime);
+    d.datetime = format.parse(d.datetime);
+    console.log(d);
   });
 
   x.domain(d3.extent(data, function(d) { return d.datetime; }));
@@ -61,6 +59,27 @@ d3.csv(btc_ave_api['24h'], function(error, data) {
     .datum(data)
     .attr("class", "line")
     .attr("d", line);
+
+}
+
+
+d3.csv(btc_ave_api['24h'], function(error, data) {
+  console.log(error);
+
+  drawGraph(data);
+
 });
 
-writeDebug('requested csv...');
+
+if (window.widget) {
+  widget.onshow = randoCircle;
+}
+
+function randoCircle() {
+  svg.append("circle")
+    .attr("cx", 100 * Math.random())
+    .attr("cy", 100 * Math.random())
+    .attr("r", 10 + 50 * Math.random())
+    .style("fill", 'red');
+}
+

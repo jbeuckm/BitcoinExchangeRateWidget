@@ -8,13 +8,16 @@
 	<string>org.beuckman.widget.bitcoin</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-<!--
-	<key>CloseBoxInsetX</key>
-	<integer>16</integer>
-	<key>CloseBoxInsetY</key>
-	<integer>14</integer>
--->
+
 	<key>MainHTML</key>
 	<string>index.html</string>
+
+  <key>AllowFileAccessOutsideOfWidget</key>
+  <true/>
+  <key>AllowNetworkAccess</key>
+  <true/>
+  <key>AllowSystem</key>
+  <true/>
+
 </dict>
 </plist>
