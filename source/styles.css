@@ -52,6 +52,21 @@ text {
   stroke-width: 1.5px;
 }
 
+.grid .tick {
+  stroke: #666;
+  opacity: 0.2;
+}
+.grid path {
+  stroke-width: 0;
+}
+.grid .tick {
+  stroke: #666;
+  opacity: 0.2;
+}
+.grid path {
+  stroke-width: 0;
+}
+
 #readout {
   width: 180px;
   height: 280px;
