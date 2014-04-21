@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowNetworkAccess</key>
+	<true/>
+	<key>AllowFullAccess</key>
+	<true/>
+
 	<key>CFBundleDisplayName</key>
 	<string>BTC Rate</string>
 	<key>CFBundleIdentifier</key>
@@ -11,13 +16,6 @@
 
 	<key>MainHTML</key>
 	<string>index.html</string>
-
-  <key>AllowFileAccessOutsideOfWidget</key>
-  <true/>
-  <key>AllowNetworkAccess</key>
-  <true/>
-  <key>AllowSystem</key>
-  <true/>
 
 </dict>
 </plist>
