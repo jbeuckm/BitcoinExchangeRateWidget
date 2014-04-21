@@ -13,7 +13,7 @@ var format, x, y, xAxis, yAxis, line, svg;
 
 function init() {
 
-  format = d3.time.format('%Y-%m-%d %H:%M:%S');
+  format = d3.time.format('%Y-%m-%d %H:%M:%S %Z');
 
   x = d3.time.scale()
     .range([0, width]);
@@ -49,7 +49,8 @@ var graph;
 function drawGraph(data) {
 
   data.forEach(function(d) {
-    d.datetime = format.parse(d.datetime);
+    // date comes in GMT
+    d.datetime = format.parse(d.datetime + " +0000");
   });
 
   x.domain(d3.extent(data, function(d) { return d.datetime; }));
