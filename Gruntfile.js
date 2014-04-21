@@ -25,11 +25,20 @@ module.exports = function(grunt) {
           'd3/d3.min.js': 'd3/d3.min.js'
         }
       }
-    }
+    },
+
+
+    command : {
+      run_shell: {
+        type : 'shell',
+        cmd  : './clear_dock_cache.sh'
+      },
+    },
 
   });
 
   // load the tasks
+  grunt.loadNpmTasks('grunt-contrib-commands');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-bowercopy');
 
