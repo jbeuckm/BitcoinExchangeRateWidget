@@ -55,8 +55,9 @@ function drawGraph(data) {
   x.domain(d3.extent(data, function(d) { return d.datetime; }));
   y.domain(d3.extent(data, function(d) { return d.average; }));
 
-  if (graph)
-  svg.remove(graph);
+  if (graph) {
+    graph.remove();
+  }
   graph = svg.append("g");
 
   graph.append("g")
@@ -100,9 +101,7 @@ function update() {
   });
 
   d3.json(btc_ave_api['ticker'], function(error, data) {
-
     drawReadout(data);
-console.log(data);
   });
 
 }
