@@ -12,6 +12,11 @@ module.exports = function(grunt) {
         expand: true
       }
     },
+    clean: {
+      build: {
+        src: [ 'BitcoinRate.wdgt' ]
+      },
+    },
 
     bowercopy: {
       options: {
@@ -37,10 +42,17 @@ module.exports = function(grunt) {
 
   });
 
+  grunt.registerTask(
+    'build',
+    'Compiles all of the assets and copies the files to the build directory.',
+    [ 'clean', 'command', 'bowercopy', 'copy' ]
+  );
+
   // load the tasks
   grunt.loadNpmTasks('grunt-contrib-commands');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-bowercopy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // define the tasks
 };
