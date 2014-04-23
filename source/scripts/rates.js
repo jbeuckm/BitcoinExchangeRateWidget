@@ -98,13 +98,13 @@ function drawReadout(data) {
 
   d3.select("#readout").append("div")
     .attr("id", "last-price")
-    .html('Last: $'+data.last);
+    .html('Last: $'+data.last.toFixed(2));
   d3.select("#readout").append("div")
     .attr("id", "ask-price")
-    .html('Ask: $'+data.ask);
+    .html('Ask: $'+data.ask.toFixed(2));
   d3.select("#readout").append("div")
     .attr("id", "bid-price")
-    .html('Bid: $'+data.bid);
+    .html('Bid: $'+data.bid.toFixed(2));
 
 }
 
