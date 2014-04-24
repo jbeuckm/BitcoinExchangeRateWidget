@@ -8,7 +8,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 400 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
 
-var format, x, y, xAxis, yAxis, line, svg;
+var format, x, y, xAxis, yAxis, line, regression_line, svg;
 
 
 function init() {
@@ -33,6 +33,10 @@ function init() {
     .x(function(d) { return x(d.datetime); })
     .y(function(d) { return y(d.average); });
 
+  regression_line = d3.svg.line()
+    .x(function(d) { return x(d.datetime); })
+    .y(function(d, i) { return y(regression(i)); });
+
 
   svg = d3.select("#container").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -44,7 +48,7 @@ function init() {
 }
 
 
-var graph;
+var graph, regression;
 
 function drawGraph(data) {
 
@@ -52,6 +56,9 @@ function drawGraph(data) {
     // date comes in GMT
     d.datetime = format.parse(d.datetime + " +0000");
   });
+
+  var raw_values = data.map(function(d){ return parseFloat(d.average); });
+  regression = numbers.statistic.exponentialRegression(raw_values);
 
   x.domain(d3.extent(data, function(d) { return d.datetime; }));
   y.domain(d3.extent(data, function(d) { return d.average; }));
@@ -89,6 +96,12 @@ function drawGraph(data) {
     .datum(data)
     .attr("class", "line")
     .attr("d", line);
+
+  graph.append("path")
+    .datum(data)
+    .attr("class", "regression-line")
+    .attr("d", regression_line)
+    .style("stroke-dasharray", ("5, 3"));
 
 }
 

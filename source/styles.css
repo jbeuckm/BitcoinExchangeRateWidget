@@ -55,6 +55,12 @@ text {
   stroke-width: 1.5px;
 }
 
+.regression-line {
+  fill: none;
+  stroke: #f63;
+  stroke-width: 2.5px;
+}
+
 .grid .tick {
   stroke: #666;
   opacity: 0.2;
