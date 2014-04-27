@@ -1,6 +1,5 @@
 
 var btc_ave_api = {
-  '24h': "https://api.bitcoinaverage.com/history/USD/per_minute_24h_sliding_window.csv",
   'ticker': "https://api.bitcoinaverage.com/ticker/USD/",
 
   "24h_sliding": "https://api.bitcoinaverage.com/history/USD/per_minute_24h_sliding_window.csv",
@@ -14,35 +13,69 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 400 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
 
-var format, x, y, xAxis, yAxis, line, regression_line, svg;
+var format, x, y, xAxis, yAxis, line, regression_line, svg, dateLabelFormat;
 
+var range = 'all_time', mode = 'log';
 
 function init() {
 
   format = d3.time.format('%Y-%m-%d %H:%M:%S %Z');
 
+  dateLabelFormat = function(d) {
+    var mon = d3.time.format('%b')
+    if (mon(d) == 'Jan') {
+      return d3.time.format('%y')(d);
+    }
+    return mon(d);
+  };
+
   x = d3.time.scale()
     .range([0, width]);
 
-  y = d3.scale.log()
-    .range([height, 0]);
+  switch (range) {
 
-  xAxis = d3.svg.axis()
-    .scale(x)
-    .tickFormat(function(d) {
-      var mon = d3.time.format('%b')
-      if (mon(d) == 'Jan') {
-        return d3.time.format('%y')(d);
-      }
-      return mon(d);
-    })
-    .ticks(8)
-    .orient("bottom");
+    case 'all_time':
+      xAxis = d3.svg.axis()
+        .scale(x)
+        .tickFormat(dateLabelFormat)
+        .ticks(8)
+        .orient("bottom");
+      break;
 
-  yAxis = d3.svg.axis()
-    .scale(y)
-    .tickFormat(y.tickFormat(1,"$,.2f"))
-    .orient("left");
+    case '24h_sliding':
+      xAxis = d3.svg.axis()
+        .scale(x)
+        .ticks(8)
+        .orient("bottom");
+      break;
+  }
+
+  switch (mode) {
+
+    case 'log':
+      y = d3.scale.log();
+
+      yAxis = d3.svg.axis()
+        .scale(y)
+        .tickFormat(y.tickFormat(1,"$,.2f"))
+        .orient("left");
+      break
+
+    case 'linear':
+      y = d3.scale.linear();
+
+      yAxis = d3.svg.axis()
+        .scale(y)
+        .tickFormat(y.tickFormat("$,.2f"))
+        .ticks(8)
+        .orient("left");
+      break
+
+  }
+
+  y.range([height, 0]);
+
+
 
   line = d3.svg.line()
     .x(function(d) { return x(d.datetime); })
@@ -138,7 +171,7 @@ function drawReadout(data) {
 
 function update() {
 
-  d3.csv(btc_ave_api['all_time'], function(error, data) {
+  d3.csv(btc_ave_api[range], function(error, data) {
 
     drawGraph(data);
 
