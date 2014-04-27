@@ -33,6 +33,13 @@ body {
   height: 297px;
 }
 
+#mode-button {
+  -apple-dashboard-region: dashboard-region(control rectangle 4px 4px 4px 4px);
+  position: absolute;
+  top: 20px;
+  left: 60px;
+}
+
 text {
   color: #bbb;
   stroke: #bbb;

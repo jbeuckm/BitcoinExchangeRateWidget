@@ -17,17 +17,7 @@ var format, x, y, xAxis, yAxis, line, regression_line, svg, dateLabelFormat;
 
 var range = 'all_time', mode = 'log';
 
-function init() {
-
-  format = d3.time.format('%Y-%m-%d %H:%M:%S %Z');
-
-  dateLabelFormat = function(d) {
-    var mon = d3.time.format('%b')
-    if (mon(d) == 'Jan') {
-      return d3.time.format('%y')(d);
-    }
-    return mon(d);
-  };
+function createAxes() {
 
   x = d3.time.scale()
     .range([0, width]);
@@ -59,7 +49,7 @@ function init() {
         .scale(y)
         .tickFormat(y.tickFormat(1,"$,.2f"))
         .orient("left");
-      break
+      break;
 
     case 'linear':
       y = d3.scale.linear();
@@ -69,12 +59,24 @@ function init() {
         .tickFormat(y.tickFormat("$,.2f"))
         .ticks(8)
         .orient("left");
-      break
+      break;
 
   }
 
   y.range([height, 0]);
+}
 
+function init() {
+
+  format = d3.time.format('%Y-%m-%d %H:%M:%S %Z');
+
+  dateLabelFormat = function(d) {
+    var mon = d3.time.format('%b')
+    if (mon(d) == 'Jan') {
+      return d3.time.format('%y')(d);
+    }
+    return mon(d);
+  };
 
 
   line = d3.svg.line()
@@ -95,10 +97,20 @@ function init() {
   update();
 }
 
+var modes = ['log', 'linear'];
+var currentMode = 0;
+function modeClicked() {
+  console.log('mode now = '+mode);
+  currentMode = (currentMode + 1) % modes.length;
+  mode = modes[currentMode];
+  updateGraph();
+}
 
 var graph, regression;
 
 function drawGraph(data) {
+
+  createAxes();
 
   data.forEach(function(d) {
     // date comes in GMT
@@ -171,16 +183,19 @@ function drawReadout(data) {
 
 function update() {
 
-  d3.csv(btc_ave_api[range], function(error, data) {
-
-    drawGraph(data);
-
-  });
+  updateGraph();
 
   d3.json(btc_ave_api['ticker'], function(error, data) {
     drawReadout(data);
   });
 
+}
+
+function updateGraph() {
+
+  d3.csv(btc_ave_api[range], function(error, data) {
+    drawGraph(data);
+  });
 }
 
 function make_x_axis() {
