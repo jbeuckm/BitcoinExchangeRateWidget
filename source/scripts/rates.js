@@ -1,7 +1,13 @@
 
 var btc_ave_api = {
   '24h': "https://api.bitcoinaverage.com/history/USD/per_minute_24h_sliding_window.csv",
-  'ticker': "https://api.bitcoinaverage.com/ticker/USD/"
+  'ticker': "https://api.bitcoinaverage.com/ticker/USD/",
+
+  "24h_sliding": "https://api.bitcoinaverage.com/history/USD/per_minute_24h_sliding_window.csv",
+  "all_time": "https://api.bitcoinaverage.com/history/USD/per_day_all_time_history.csv",
+  "global_24h_sliding": "https://api.bitcoinaverage.com/history/USD/per_minute_24h_global_average_sliding_window.csv",
+  "monthly_sliding": "https://api.bitcoinaverage.com/history/USD/per_hour_monthly_sliding_window.csv",
+  "volumes": "https://api.bitcoinaverage.com/history/USD/volumes.csv"
 };
 
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -18,15 +24,24 @@ function init() {
   x = d3.time.scale()
     .range([0, width]);
 
-  y = d3.scale.linear()
+  y = d3.scale.log()
     .range([height, 0]);
 
   xAxis = d3.svg.axis()
     .scale(x)
+    .tickFormat(function(d) {
+      var mon = d3.time.format('%b')
+      if (mon(d) == 'Jan') {
+        return d3.time.format('%y')(d);
+      }
+      return mon(d);
+    })
+    .ticks(8)
     .orient("bottom");
 
   yAxis = d3.svg.axis()
     .scale(y)
+    .tickFormat(y.tickFormat(1,"$,.2f"))
     .orient("left");
 
   line = d3.svg.line()
@@ -123,7 +138,7 @@ function drawReadout(data) {
 
 function update() {
 
-  d3.csv(btc_ave_api['24h'], function(error, data) {
+  d3.csv(btc_ave_api['all_time'], function(error, data) {
 
     drawGraph(data);
 
