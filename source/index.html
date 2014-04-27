@@ -14,7 +14,14 @@
 
   <div id="container">
 
-    <button id="mode-button" onclick="modeClicked()">MODE</button>
+    <select id="mode-select" onchange="modeChanged(this)">
+      <option value="log">log</option>
+      <option value="linear">linear</option>
+    </select>
+    <select id="range-select" onchange="rangeChanged(this)">
+      <option value="all_time">all_time</option>
+      <option value="24h_sliding">24h_sliding</option>
+    </select>
 
     <div id="readout"></div>
 

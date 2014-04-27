@@ -33,11 +33,17 @@ body {
   height: 297px;
 }
 
-#mode-button {
+#range-select {
   -apple-dashboard-region: dashboard-region(control rectangle 4px 4px 4px 4px);
   position: absolute;
-  top: 20px;
+  top: 10px;
   left: 60px;
+}
+#mode-select {
+  -apple-dashboard-region: dashboard-region(control rectangle 4px 4px 4px 4px);
+  position: absolute;
+  top: 10px;
+  left: 160px;
 }
 
 text {

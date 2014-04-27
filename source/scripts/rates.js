@@ -97,12 +97,13 @@ function init() {
   update();
 }
 
-var modes = ['log', 'linear'];
-var currentMode = 0;
-function modeClicked() {
-  console.log('mode now = '+mode);
-  currentMode = (currentMode + 1) % modes.length;
-  mode = modes[currentMode];
+
+function modeChanged(e) {
+  mode = e.value;
+  updateGraph();
+}
+function rangeChanged(e) {
+  range = e.value;
   updateGraph();
 }
 
