@@ -2,9 +2,10 @@
 var btc_ave_api = {
   'ticker': "https://api.bitcoinaverage.com/ticker/USD/",
 
-  "24h_sliding": "https://api.bitcoinaverage.com/history/USD/per_minute_24h_sliding_window.csv",
-  "all_time": "https://api.bitcoinaverage.com/history/USD/per_day_all_time_history.csv",
-  "global_24h_sliding": "https://api.bitcoinaverage.com/history/USD/per_minute_24h_global_average_sliding_window.csv",
+  "24h": "https://api.bitcoinaverage.com/history/USD/per_minute_24h_sliding_window.csv",
+  "all": "https://api.bitcoinaverage.com/history/USD/per_day_all_time_history.csv",
+
+  "global_24h": "https://api.bitcoinaverage.com/history/USD/per_minute_24h_global_average_sliding_window.csv",
   "monthly_sliding": "https://api.bitcoinaverage.com/history/USD/per_hour_monthly_sliding_window.csv",
   "volumes": "https://api.bitcoinaverage.com/history/USD/volumes.csv"
 };
@@ -15,7 +16,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
 
 var format, x, y, xAxis, yAxis, line, regression_line, svg, dateLabelFormat;
 
-var range = 'all_time', mode = 'log';
+var range = 'all', mode = 'log';
 
 function createAxes() {
 
@@ -24,7 +25,7 @@ function createAxes() {
 
   switch (range) {
 
-    case 'all_time':
+    case 'all':
       xAxis = d3.svg.axis()
         .scale(x)
         .tickFormat(dateLabelFormat)
@@ -32,7 +33,7 @@ function createAxes() {
         .orient("bottom");
       break;
 
-    case '24h_sliding':
+    case '24h':
       xAxis = d3.svg.axis()
         .scale(x)
         .ticks(8)
@@ -94,17 +95,41 @@ function init() {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  updateTogglers();
   update();
 }
 
 
 function modeChanged(e) {
-  mode = e.value;
+  mode = e;
+  updateTogglers();
   updateGraph();
 }
 function rangeChanged(e) {
-  range = e.value;
+  range = e;
+  updateTogglers();
   updateGraph();
+}
+
+
+function updateTogglers() {
+  removeClass('active');
+  d3.select('#mode-'+mode).classed('active', true);
+  d3.select('#range-'+range).classed('active', true);
+}
+
+function removeClass(className) {
+  // convert the result to an Array object
+  var els = Array.prototype.slice.call(
+    document.getElementsByClassName(className)
+  );
+  for (var i = 0, l = els.length; i < l; i++) {
+    var el = els[i];
+    el.className = el.className.replace(
+      new RegExp('(^|\\s+)' + className + '(\\s+|$)', 'g'),
+      '$1'
+    );
+  }
 }
 
 var graph, regression;

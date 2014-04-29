@@ -14,14 +14,25 @@
 
   <div id="container">
 
-    <select id="mode-select" onchange="modeChanged(this)">
-      <option value="log">log</option>
-      <option value="linear">linear</option>
-    </select>
-    <select id="range-select" onchange="rangeChanged(this)">
-      <option value="all_time">all_time</option>
-      <option value="24h_sliding">24h_sliding</option>
-    </select>
+    <div id="top-bar">
+
+      <span class="range-toggler" id="range-24h" onclick="rangeChanged('24h')">
+        24h
+      </span>
+      <span class="range-toggler" id="range-all" onclick="rangeChanged('all')">
+        all
+      </span>
+
+      &nbsp;
+
+      <span class="mode-toggler" id="mode-log" onclick="modeChanged('log')">
+        log
+      </span>
+      <span class="mode-toggler" id="mode-linear" onclick="modeChanged('linear')">
+        lin
+      </span>
+
+    </div>
 
     <div id="readout"></div>
 

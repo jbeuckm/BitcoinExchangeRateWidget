@@ -33,19 +33,26 @@ body {
   height: 297px;
 }
 
-#range-select {
-  -apple-dashboard-region: dashboard-region(control rectangle 4px 4px 4px 4px);
+#top-bar {
   position: absolute;
-  top: 10px;
-  left: 60px;
-}
-#mode-select {
-  -apple-dashboard-region: dashboard-region(control rectangle 4px 4px 4px 4px);
-  position: absolute;
-  top: 10px;
-  left: 160px;
+  right: 12px;
+  bottom: 12px;
 }
 
+.range-toggler, .mode-toggler {
+  -apple-dashboard-region: dashboard-region(control rectangle 4px 4px 4px 4px);
+  cursor: pointer;
+
+  font-size: 12px;
+  font-weight: bold;
+  background-color: transparent;
+  padding: 3px;
+  border: 1px solid #ddd;
+}
+.active {
+  background-color: #ddd;
+  color: #212121;
+}
 text {
   color: #bbb;
   stroke: #bbb;
@@ -91,7 +98,7 @@ text {
 
 #readout {
   width: 180px;
-  height: 280px;
+  height: 150px;
   position: absolute;
   top: 40px;
   right: 0px;

@@ -1,0 +1,1 @@
+open ./BitcoinRate.wdgt

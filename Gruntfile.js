@@ -37,7 +37,7 @@ module.exports = function(grunt) {
       run_shell: {
         type : 'shell',
         cmd  : './clear_dock_cache.sh'
-      },
+      }
     },
 
   });
