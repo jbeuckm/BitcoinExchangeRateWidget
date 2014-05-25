@@ -3,6 +3,5 @@
 .idea/
 node_modules/
 bower_components/
-BitcoinRate.wdgt
 .*~
 *.*~

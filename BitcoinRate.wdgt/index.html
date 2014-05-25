@@ -1,0 +1,43 @@
+<html>
+
+<head>
+
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+  <script type="text/javascript" charset="utf-8" src="scripts/vendor/d3/d3.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="scripts/vendor/numbers/numbers.js"></script>
+  <script type="text/javascript" charset="utf-8" src="scripts/rates.js"></script>
+
+</head>
+
+<body onload="init()">
+
+  <div id="container">
+
+    <div id="top-bar">
+
+      <span class="range-toggler" id="range-24h" onclick="rangeChanged('24h')">
+        24h
+      </span>
+      <span class="range-toggler" id="range-all" onclick="rangeChanged('all')">
+        all
+      </span>
+
+      &nbsp;
+
+      <span class="mode-toggler" id="mode-log" onclick="modeChanged('log')">
+        log
+      </span>
+      <span class="mode-toggler" id="mode-linear" onclick="modeChanged('linear')">
+        lin
+      </span>
+
+    </div>
+
+    <div id="readout"></div>
+
+  </div>
+
+</body>
+
+</html>
