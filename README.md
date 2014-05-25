@@ -7,7 +7,7 @@ OSX dashboard widget showing latest USD/BTC rate
 
 ### Instalación ###
 
-Download the repo. The `BitcoinRateWidget.wdgt` folder is ready to click and install.
+Download the repo. The `BitcoinRate.wdgt` folder is ready to click and install.
 
 ### Build the Project ###
 
